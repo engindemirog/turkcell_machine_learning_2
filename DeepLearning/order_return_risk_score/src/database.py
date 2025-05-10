@@ -1,6 +1,6 @@
 import psycopg2
 import pandas as pd
-from config import DB_CONFIG
+from src.config import DB_CONFIG
 
 class DatabaseManager:
     def __init__(self):
@@ -9,7 +9,7 @@ class DatabaseManager:
 
     def connect(self):
         try:
-          self.conn = psycopg2.connect()
+          self.conn = psycopg2.connect(**DB_CONFIG)
           print("Database connected")
         except Exception as e:
           print("Error occured while connection to the db")

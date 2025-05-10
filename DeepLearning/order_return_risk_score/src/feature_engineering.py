@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from config import FEATURE_CONFIG
+from src.config import FEATURE_CONFIG
 from sklearn.preprocessing import StandardScaler
 
 class FeatureEngineer:
@@ -8,7 +8,7 @@ class FeatureEngineer:
         self.scaler = StandardScaler()
         self.customer_features = None
 
-    def create_feature(self,df):
+    def create_features(self,df):
         df["total_amount"] = df["unit_price"]*df["quantity"]*(1-df["discount"])
         df["discount_amount"] = df["unit_price"]*df["quantity"]*df["discount"]
 
@@ -33,6 +33,16 @@ class FeatureEngineer:
 
         return df
 
-    
+    def prepare_model_data(self,df):
+        feature_columns = ["unit_price","quantity","discount","total_amount",
+                           "discount_amount","avg_order_amount","std_order_amount",
+                           "total_spent","avg_discount","max_discount","avg_quantity",
+                           "total_quantity"]
+        
+        X = df[feature_columns]
+        y = df["return_risk"]
+
+        X_scaled = self.scaler.fit_transform(X)
+        return X_scaled,y
 
     
