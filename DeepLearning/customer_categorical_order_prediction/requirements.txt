@@ -1,0 +1,8 @@
+tensorflow==2.15.0
+numpy==1.26.3
+pandas==2.2.0
+psycopg2-binary==2.9.9
+scikit-learn==1.4.0
+python-dotenv==1.0.1
+matplotlib==3.8.2
+seaborn==0.13.2 
